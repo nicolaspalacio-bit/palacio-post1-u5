@@ -217,15 +217,26 @@ Este laboratorio marcó explícitamente cuatro puntos de decisión, sin indicar 
 
 ## Capturas de pantalla
 
-> Esta sección se completa al ejecutar el proyecto localmente (`mvn spring-boot:run`), ya que las capturas deben reflejar la instancia real corriendo en el equipo de quien entrega el laboratorio.
+- [x] `GET /api/laboratorios` en Postman/curl — catálogo cargado desde `data.sql`.
+  ![Catálogo de laboratorios](capturas/catalogo-laboratorios.png)
 
-- [ ] `GET /api/laboratorios` en Postman/curl — catálogo cargado desde `data.sql`.
-- [ ] `POST /api/reservas` exitoso — 201 Created.
-- [ ] `POST /api/reservas` con horario solapado — 409 Conflict con el mensaje de negocio.
-- [ ] `POST /api/reservas` fuera de horario de atención — 400 Bad Request.
-- [ ] `/reservas` en el navegador — lista con al menos una reserva confirmada.
-- [ ] `/reservas/nueva` en el navegador — formulario con el catálogo de laboratorios cargado.
-- [ ] `/reservas/nueva` mostrando el mismo mensaje de conflicto de horario que ya devuelve la API REST en JSON (evidencia del Punto de decisión 4).
+- [x] `POST /api/reservas` exitoso — 201 Created.
+  ![Reserva creada](capturas/reserva-creada-201.png)
+
+- [x] `POST /api/reservas` con horario solapado — 409 Conflict con el mensaje de negocio.
+  ![Reserva solapada vía API](capturas/reserva-solapada-409-api.png)
+
+- [x] `POST /api/reservas` fuera de horario de atención — 400 Bad Request.
+  ![Reserva fuera de horario](capturas/reserva-fuera-horario-400.png)
+
+- [x] `/reservas` en el navegador — lista con al menos una reserva confirmada.
+  ![Vista de reservas](capturas/vista-reservas.png)
+
+- [x] `/reservas/nueva` en el navegador — formulario con el catálogo de laboratorios cargado.
+  ![Formulario de nueva reserva](capturas/formulario-nueva-reserva.png)
+
+- [x] `/reservas/nueva` mostrando el mismo mensaje de conflicto de horario que ya devuelve la API REST en JSON (evidencia del Punto de decisión 4).
+  ![Conflicto de horario en la vista web](capturas/reserva-solapada-409-web.png)
 
 ## Herramientas utilizadas
 
