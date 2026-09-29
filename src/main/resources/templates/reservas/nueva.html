@@ -1,0 +1,72 @@
+<!-- src/main/resources/templates/reservas/nueva.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nueva Reserva</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<header class="app-bar">
+    <h1>Sistema de Reservas de Laboratorios</h1>
+    <div class="subtitulo">Universidad de Santander (UDES) · Vista MVC (Thymeleaf)</div>
+</header>
+
+<nav class="app-nav">
+    <a href="/reservas">Reservas</a>
+    <a href="/reservas/nueva">Nueva reserva</a>
+    <a href="/api/reservas">API REST (JSON)</a>
+</nav>
+
+<main>
+
+    <p class="aviso aviso-error" th:if="${error}" th:text="${error}"></p>
+
+    <div class="tarjeta">
+        <strong>Nueva reserva</strong>
+
+        <form th:action="@{/reservas}" th:object="${reserva}" method="post" style="margin-top:1rem">
+
+            <div class="form-grupo">
+                <label>Laboratorio</label>
+                <select name="laboratorio.id">
+                    <option th:each="lab : ${laboratorios}" th:value="${lab.id}"
+                            th:text="${lab.nombre + ' — ' + lab.ubicacion}"></option>
+                </select>
+            </div>
+
+            <div class="form-grupo">
+                <label>Nombre del solicitante</label>
+                <input type="text" th:field="*{nombreSolicitante}"/>
+            </div>
+
+            <div class="form-grupo">
+                <label>Correo institucional</label>
+                <input type="email" th:field="*{correoSolicitante}"/>
+            </div>
+
+            <div class="form-grupo">
+                <label>Inicio</label>
+                <input type="datetime-local" th:field="*{inicio}"/>
+            </div>
+
+            <div class="form-grupo">
+                <label>Fin</label>
+                <input type="datetime-local" th:field="*{fin}"/>
+            </div>
+
+            <div class="form-grupo">
+                <label>Motivo</label>
+                <input type="text" th:field="*{motivo}" placeholder="Ej. Práctica de Bases de Datos"/>
+            </div>
+
+            <button type="submit" class="boton">Reservar</button>
+            <a href="/reservas" class="boton boton-secundario">Cancelar</a>
+        </form>
+    </div>
+
+</main>
+
+</body>
+</html>

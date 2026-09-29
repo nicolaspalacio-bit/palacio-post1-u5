@@ -1,0 +1,73 @@
+<!-- src/main/resources/templates/reservas/lista.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Reservas de Laboratorios</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<header class="app-bar">
+    <h1>Sistema de Reservas de Laboratorios</h1>
+    <div class="subtitulo">Universidad de Santander (UDES) · Vista MVC (Thymeleaf)</div>
+</header>
+
+<nav class="app-nav">
+    <a href="/reservas">Reservas</a>
+    <a href="/reservas/nueva">Nueva reserva</a>
+    <a href="/api/reservas">API REST (JSON)</a>
+</nav>
+
+<main>
+
+    <p class="aviso aviso-exito" th:if="${mensaje}" th:text="${mensaje}"></p>
+    <p class="aviso aviso-error" th:if="${error}" th:text="${error}"></p>
+
+    <div class="tarjeta">
+        <div class="acciones-top">
+            <strong>Reservas registradas</strong>
+            <a class="boton" href="/reservas/nueva">Nueva reserva</a>
+        </div>
+
+        <p class="vacio" th:if="${#lists.isEmpty(reservas)}">
+            Todavía no hay reservas registradas.
+        </p>
+
+        <table th:unless="${#lists.isEmpty(reservas)}">
+            <thead>
+            <tr>
+                <th>Laboratorio</th>
+                <th>Solicitante</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${reservas}">
+                <td th:text="${r.laboratorio.nombre}"></td>
+                <td th:text="${r.nombreSolicitante}"></td>
+                <td th:text="${#temporals.format(r.inicio, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${#temporals.format(r.fin, 'dd/MM/yyyy HH:mm')}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${'badge-' + #strings.toLowerCase(r.estado)}"
+                          th:text="${r.estado}"></span>
+                </td>
+                <td>
+                    <form th:action="@{/reservas/{id}/cancelar(id=${r.id})}" method="post"
+                          th:if="${r.estado.name() == 'CONFIRMADA'}">
+                        <button type="submit" class="boton-peligro">Cancelar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>
